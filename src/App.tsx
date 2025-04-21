@@ -8,19 +8,22 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import MealDetail from "./pages/MealDetail";
 
-
 function App() {
   return (
-    <div  >
-    <Navbar/>
-      <Routes >
-        <Route path="/" element={<Home/>}></Route>
-        <Route path="/meals/:id" element={<MealDetail/>}></Route>
-        <Route path="/menu" element={<Menu/>}></Route>
-        <Route path="/about" element={<About/>}></Route>
-        <Route path="contact" element={<Contact/>}></Route>
-      </Routes>
-    <Footer/>
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/meals/:id" element={<MealDetail />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
+
+      <Footer />
     </div>
   );
 }

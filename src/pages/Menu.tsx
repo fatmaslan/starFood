@@ -6,7 +6,7 @@ interface Meal {
   id: number;
   title: string;
   price: number;
-  name:string;
+  name: string;
   images: { id: number; image: string }[];
 }
 
@@ -18,9 +18,20 @@ interface Category {
 
 const Menu = () => {
   const [categories, setCategories] = useState<Category[] | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
-    null
-  );
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [foods, setFoods] = useState<Meal[]>([]);
+
+  useEffect(() => {
+    const fetchFoods = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/api/foods/");
+        setFoods(response.data);
+      } catch (error) {
+        console.log("Yemek verisi alinirken hata oluştu:", error);
+      }
+    };
+    fetchFoods();
+  }, []);
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -46,7 +57,7 @@ const Menu = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       {/* Kategoriler */}
-      <div className="mt-32 flex items-center justify-center">
+      <div className="mt-18 flex items-center justify-center">
         <div className="flex gap-10 flex-wrap justify-center">
           {categories?.map((category) => (
             <button
@@ -59,34 +70,31 @@ const Menu = () => {
           ))}
         </div>
       </div>
-
-      {/* Seçilen Kategorinin Yemekleri */}
-      {selectedCategory && (
-        <div className="mt-10 flex flex-col items-start px-4">
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {selectedCategory.meals.length > 0 ? (
-              selectedCategory.meals.map((meal) => (
-                <li key={meal.id} className="p-4 rounded-lg shadow-md bg-gray-200 ">
-                  <p className="text-lg text-yellow-600 font-bold ">{meal.title}</p>
-                  {/* Yemek Resimleri */}
-                  {meal.images.length > 0 && (
-                    <Link to={`/meals/${meal.id}`}>
-                    <img
-                      key={meal.images[0].id} 
-                      src={meal.images[0].image} 
-                      alt={meal.name} 
-                      className="w-full h-50 object-cover my-5 rounded-md"
-                    />
-                     </Link> 
-                  )}
-                </li>
-              ))
-            ) : (
-              <p>There are no dishes in this category.</p>
-            )}
-          </ul>
-        </div>
-      )}
+      {/* Yemekler (Tüm Yemekler veya Seçilen Kategori) */}
+      <div className="px-4 mt-10">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {(selectedCategory ? selectedCategory.meals : foods).map((meal) => (
+            <li
+              key={meal.id}
+              className="p-4 rounded-lg shadow-md bg-white"
+            >
+              {meal.images.length > 0 && (
+                <Link to={`/meals/${meal.id}`}>
+                  <img
+                    key={meal.images[0].id}
+                    src={meal.images[0].image}
+                    alt={meal.name}
+                    className="w-full h-[300px] object-cover my-5 rounded-md"
+                  />
+                </Link>
+              )}
+              <p className="text-lg text-yellow-600 font-bold ">
+                {meal.title}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

@@ -1,10 +1,20 @@
+
+
 const About = () => {
   return (
-    <div className=" flex flex-col min-h-screen">
-      <div className=" bg-gray-400 w-full min-h-screen flex items-center mt-10 ">
-        <div className="flex flex-col md:flex-row gap-10 md:gap-24 px-5 md:px-20 ">
-          <h2 className="text-white text-5xl sm:text-7xl md:text-9xl font-serif text-center md:text-left">About</h2>
-          <p className="text-gray-800 text-sm sm:text-base text-justify leading-relaxed">
+    <div className=" flex flex-col flex-grow">
+      <div className=" w-full min-h-screen flex items-center md:mt-10 mt-20 ">
+        <div className="flex flex-col md:flex-row gap-10  px-5 md:px-20 ">
+          <div className="flex flex-col items-center justify-center">
+            <img
+
+              src="/about.jpg"
+              alt="About Us"
+              className=" h-[400px] w-[1000px] object-cover mb-10 rounded-xl"/>
+          </div>
+          <div className="mb-10"> 
+          <h2 className="font-bold text-2xl text-yellow-600 text-center md:mb-8 mb-0">About Us</h2>
+          <p className="text-gray-800 text-sm sm:text-base text-justify leading-relaxed md:mb-8 mb-0">
             I'm a paragraph. Click here to add your own text and edit me. It’s
             easy. Just click “Edit Text” or double click me to add your own
             content and make changes to the font. Feel free to drag and drop me
@@ -26,6 +36,7 @@ const About = () => {
             Reassure potential customers that they won't regret choosing your
             services.
           </p>
+          </div>
         </div>
       </div>
     </div>

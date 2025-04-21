@@ -46,10 +46,10 @@ const MealDetail = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen items-center">
-    <h1 className="text-3xl font-bold text-yellow-500 pt-36">{meal.title}</h1>
+    <div className="flex flex-col min-h-screen items-center mt-16 ">
+    <h1 className="text-3xl font-bold text-yellow-500 ">{meal.title}</h1>
     <div className="flex flex-1/2 p-5 gap-10  ">  
-      <div className="flex items-center justify-center p-5 gap-3 mt-0.5 w-full h-[500px] overflow-hidden rounded-4xl">
+      <div className="flex items-center justify-center p-5 gap-3 mt-0.5 w-full h-[400px] overflow-hidden rounded-4xl">
         {meal.images && meal.images.length > 0 ? (
           <Carousel
             plugins={[plugin.current]}
